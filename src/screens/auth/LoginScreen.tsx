@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { theme } from '../../constants/theme';
+import { Input } from '../../components/atoms/Input';
 
-export const LoginScreen = () => {
+export const LoginScreen = ({ navigation }: any) => {
   const [phone, setPhone] = React.useState('');
 
   return (
@@ -122,5 +123,13 @@ const styles = StyleSheet.create({
     bottom: theme.spacing.xl,
     left: theme.spacing.xl,
     right: theme.spacing.xl,
+  },
+  signupLink: {
+    marginTop: theme.spacing.xl,
+    alignItems: 'center',
+  },
+  signupLinkText: {
+    ...theme.typography.body as any,
+    color: theme.colors.textSecondary,
   },
 });
