@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "farmwatch": {
+      "sheds": {
+        "$shed_id": {
+          "live_state": {
+            ".write": "auth != null && root.child('farmwatch/sheds/' + $shed_id + '/esp32_uid').val() == auth.uid",
+            ".read":  "auth != null"
+          },
+          "pending_events": {
+            ".write": "auth != null && root.child('farmwatch/sheds/' + $shed_id + '/esp32_uid').val() == auth.uid",
+            ".read":  "auth != null"
+          }
+        }
+      },
+      ".read":  false,
+      ".write": false
+    }
+  }
+}
