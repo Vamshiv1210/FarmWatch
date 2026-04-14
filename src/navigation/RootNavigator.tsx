@@ -11,6 +11,7 @@ import { LoginScreen } from '../screens/auth/LoginScreen';
 import { SignupScreen } from '../screens/auth/SignupScreen';
 import { OTPScreen } from '../screens/auth/OTPScreen';
 import { MainTabNavigator } from './MainTabNavigator';
+import { DashboardScreen } from '../screens/dashboard/DashboardScreen';
 
 // Placeholder Screens (to be implemented)
 const Placeholder = ({ name }: { name: string }) => <></>;
