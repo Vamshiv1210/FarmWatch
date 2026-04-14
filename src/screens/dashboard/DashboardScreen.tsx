@@ -1,107 +1,76 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, ScrollView, SafeAreaView, StatusBar } from 'react-native';
 import { theme } from '../../constants/theme';
+import { TopBar } from '../../components/organisms/TopBar';
+import { AlertBanner } from '../../components/molecules/AlertBanner';
+import { ShedCard } from '../../components/molecules/ShedCard';
+import { CameraGrid } from '../../components/molecules/CameraGrid';
 
 export const DashboardScreen = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.greeting}>Good Morning,</Text>
-        <Text style={styles.title}>Farm Overview</Text>
+    <SafeAreaView style={styles.safe}>
+      <StatusBar barStyle="light-content" backgroundColor={theme.colors.surface} />
+      <View style={styles.container}>
+        <TopBar />
+        
+        <ScrollView 
+          stickyHeaderIndices={[1]}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+        >
+          <AlertBanner />
+          
+          <View style={styles.sectionHeader}>
+            <View style={styles.divider} />
+          </View>
+
+          <View style={styles.content}>
+            <ShedCard 
+              name="Shed 1 - Layers" 
+              status="online" 
+              water={72} 
+              temp={29} 
+              lastCaretaker="Rajesh Kumar (10:15 AM)" 
+            />
+            
+            <ShedCard 
+              name="Shed 2 - Broilers" 
+              status="online" 
+              water={18} 
+              temp={31} 
+              lastCaretaker="Suresh P. (08:45 AM)" 
+            />
+
+            <CameraGrid />
+          </View>
+        </ScrollView>
       </View>
-
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.alertBanner}>
-          <Text style={styles.alertText}>⚠️ 2 Active Alerts</Text>
-        </View>
-
-        {/* Shed Cards will go here */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Shed 1 - Layers</Text>
-          <View style={styles.statsRow}>
-            <StatItem label="Water" value="72%" color={theme.colors.success} />
-            <StatItem label="Temp" value="29°C" color={theme.colors.medium} />
-          </View>
-        </View>
-
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Shed 2 - Broilers</Text>
-          <View style={styles.statsRow}>
-            <StatItem label="Water" value="18%" color={theme.colors.critical} />
-            <StatItem label="Temp" value="31°C" color={theme.colors.high} />
-          </View>
-        </View>
-      </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
-const StatItem = ({ label, value, color }: { label: string; value: string; color: string }) => (
-  <View style={styles.statContainer}>
-    <Text style={styles.statLabel}>{label}</Text>
-    <Text style={[styles.statValue, { color }]}>{value}</Text>
-  </View>
-);
-
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: theme.colors.surface,
+  },
   container: {
     flex: 1,
     backgroundColor: theme.colors.background,
   },
-  header: {
-    padding: theme.spacing.lg,
-    paddingTop: theme.spacing.xl * 2,
-    backgroundColor: theme.colors.surface,
-  },
-  greeting: {
-    ...theme.typography.body as any,
-    color: theme.colors.secondary,
-  },
-  title: {
-    ...theme.typography.h1 as any,
-    color: theme.colors.textPrimary,
-  },
   scrollContent: {
-    padding: theme.spacing.md,
+    paddingBottom: 40,
   },
-  alertBanner: {
+  content: {
+    paddingHorizontal: theme.spacing.lg,
+  },
+  sectionHeader: {
+    height: 1,
     backgroundColor: theme.colors.card,
-    padding: theme.spacing.md,
-    borderRadius: theme.borderRadius.lg,
-    marginBottom: theme.spacing.md,
-    borderLeftWidth: 4,
-    borderLeftColor: theme.colors.high,
+    marginVertical: theme.spacing.sm,
   },
-  alertText: {
-    ...theme.typography.h3 as any,
-    color: theme.colors.textPrimary,
-  },
-  card: {
-    backgroundColor: theme.colors.surface,
-    padding: theme.spacing.lg,
-    borderRadius: theme.borderRadius.xl,
-    marginBottom: theme.spacing.md,
-    ...theme.shadows.soft as any,
-  },
-  cardTitle: {
-    ...theme.typography.h3 as any,
-    color: theme.colors.textPrimary,
-    marginBottom: theme.spacing.md,
-  },
-  statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  statContainer: {
-    alignItems: 'center',
-  },
-  statLabel: {
-    ...theme.typography.caption as any,
-    color: theme.colors.textSecondary,
-    marginBottom: 4,
-  },
-  statValue: {
-    ...theme.typography.h2 as any,
-    fontWeight: '700',
+  divider: {
+    height: 1,
+    backgroundColor: theme.colors.card,
   },
 });

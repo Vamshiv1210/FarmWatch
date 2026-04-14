@@ -10,7 +10,7 @@ import { theme } from '../constants/theme';
 import { LoginScreen } from '../screens/auth/LoginScreen';
 import { SignupScreen } from '../screens/auth/SignupScreen';
 import { OTPScreen } from '../screens/auth/OTPScreen';
-import { DashboardScreen } from '../screens/dashboard/DashboardScreen';
+import { MainTabNavigator } from './MainTabNavigator';
 
 // Placeholder Screens (to be implemented)
 const Placeholder = ({ name }: { name: string }) => <></>;
@@ -29,7 +29,7 @@ export const RootNavigator = () => {
         }}
       >
         {isAuthenticated ? (
-          <Stack.Screen name="Main" component={MainNavigator} />
+          <Stack.Screen name="Main" component={MainTabNavigator} />
         ) : (
           <Stack.Screen name="Auth" component={AuthNavigator} />
         )}
