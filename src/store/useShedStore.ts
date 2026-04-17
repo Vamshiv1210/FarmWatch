@@ -26,9 +26,36 @@ interface ShedState {
 }
 
 export const useShedStore = create<ShedState>((set) => ({
-  sheds: [],
+  sheds: [
+    {
+      id: '1',
+      name: 'Shed 1 - Layers',
+      last_caretaker_name: 'Rajesh Kumar',
+      last_entry_ts: Date.now() - 3600000,
+      live_state: {
+        water_level_pct: 72,
+        temperature_c: 29.5,
+        humidity_pct: 65,
+        last_updated: Date.now(),
+        esp32_online: true,
+      }
+    },
+    {
+      id: '2',
+      name: 'Shed 2 - Broilers',
+      last_caretaker_name: 'Suresh P.',
+      last_entry_ts: Date.now() - 7200000,
+      live_state: {
+        water_level_pct: 18,
+        temperature_c: 32.1,
+        humidity_pct: 70,
+        last_updated: Date.now(),
+        esp32_online: true,
+      }
+    }
+  ],
   selectedShedId: null,
-  isLoading: true,
+  isLoading: false, // UI-Only Mock Mode
   setSheds: (sheds) => set({ sheds, isLoading: false }),
   selectShed: (id) => set({ selectedShedId: id }),
   updateShedData: (shedId, data) => set((state) => ({

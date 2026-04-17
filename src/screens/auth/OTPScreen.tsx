@@ -1,15 +1,28 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 import { theme } from '../../constants/theme';
+import { useAuthStore } from '../../store/useAuthStore';
 
 export const OTPScreen = ({ navigation, route }: any) => {
   const [otp, setOtp] = React.useState('');
   const { flow } = route.params || { flow: 'login' };
+  const setUser = useAuthStore((state) => state.setUser);
+  const tempSignupData = useAuthStore((state) => state.tempSignupData);
 
   const handleVerify = () => {
-    // TODO: Verify OTP with Firebase
-    // For prototype: Bypass
+    // UI-Only Mock Mode: Success
     console.log('Verifying OTP for flow:', flow);
+    
+    // Simulate setting authenticated user
+    const mockUser = {
+      uid: 'mock-user-123',
+      phoneNumber: tempSignupData?.phoneNumber || '+91 98765 43210',
+      role: 'admin' as const,
+      name: tempSignupData?.name || 'Tester User',
+    };
+    
+    setUser(mockUser);
+    // Navigation to 'Main' happens automatically in RootNavigator based on isAuthenticated
   };
 
   return (

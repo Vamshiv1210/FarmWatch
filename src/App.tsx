@@ -6,16 +6,6 @@ import { useAuthStore } from './store/useAuthStore';
 
 const App = () => {
   const isLoading = useAuthStore((state) => state.isLoading);
-  const setLoading = useAuthStore((state) => state.setLoading);
-
-  React.useEffect(() => {
-    // Mocking an initial auth check (e.g. checking token in storage)
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [setLoading]);
 
   if (isLoading) {
     return (

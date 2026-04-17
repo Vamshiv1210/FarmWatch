@@ -20,7 +20,7 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   isAuthenticated: false,
-  isLoading: true,
+  isLoading: false, // UI-Only Mock Mode
   tempSignupData: null,
   setUser: (user) => set({ user, isAuthenticated: !!user, isLoading: false, tempSignupData: null }),
   setLoading: (isLoading) => set({ isLoading }),
